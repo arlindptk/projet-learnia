@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+<style>
+    header { background: white; border-bottom: 1px solid #eee; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .role { font-size: 12px; padding: 4px 10px; border-radius: 4px; }
+    .role-admin { background: #333; color: white; }
+    .role-user { background: #eee; color: #333; }
+    .logout { color: #888; font-size: 14px; }
+    .logout:hover { color: #333; }
+    .main { padding: 40px 20px; text-align: center; }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    p { color: #666; }
+</style>
+{% endblock %}
+
+{% block body %}
+<header>
+    <div>
+        {% if app.user.isAdmin %}
+            <span class="role role-admin">Admin</span>
+        {% else %}
+            <span class="role role-user">Utilisateur</span>
+        {% endif %}
+    </div>
+    <a href="{{ path('app_logout') }}" class="logout">Déconnexion</a>
+</header>
+
+<div class="main">
+    <h1>Bienvenue</h1>
+    <p>Vous êtes connecté en tant que <strong>{{ app.user.isAdmin ? 'administrateur' : 'utilisateur' }}</strong>.</p>
+</div>
+{% endblock %}
